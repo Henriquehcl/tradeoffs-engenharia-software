@@ -1,0 +1,28 @@
+#!/usr/bin/env sh
+# ===========================================================================
+# Husky Pre-Commit Hook
+# ===========================================================================
+#
+# Executado automaticamente antes de cada commit.
+# Garante que o código commitado está em conformidade com as regras
+# de lint e que os testes passam.
+#
+# Se algum check falhar, o commit é bloqueado.
+# ===========================================================================
+
+. "$(dirname -- "$0")/_/husky.sh"
+
+echo "🔍 Executando checks pré-commit..."
+
+# Roda lint no backend
+echo "📝 Lint do backend..."
+cd backend && npx eslint "{src,apps,libs,test}/*/*.ts" --max-warnings 0
+
+# Roda testes unitários do backend
+echo "🧪 Testes do backend..."
+npx jest --passWithNoTests
+
+# Volta para raiz
+cd ..
+
+echo "✅ Todos os checks passaram!"

@@ -1,0 +1,174 @@
+/*
+ * ===========================================================================
+ * Login Page CSS - Estilos da Página de Login
+ * ===========================================================================
+ */
+
+.login-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ===== Background Decorativo ===== */
+.login-bg-decoration {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.login-bg-circle {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.15;
+}
+
+.login-bg-circle-1 {
+  width: 400px;
+  height: 400px;
+  background: var(--color-primary);
+  top: -100px;
+  right: -100px;
+}
+
+.login-bg-circle-2 {
+  width: 300px;
+  height: 300px;
+  background: #a855f7;
+  bottom: -50px;
+  left: -50px;
+}
+
+.login-bg-circle-3 {
+  width: 200px;
+  height: 200px;
+  background: #3b82f6;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* ===== Card de Login ===== */
+.login-card {
+  width: 100%;
+  max-width: 440px;
+  padding: 48px 40px;
+  position: relative;
+  z-index: 1;
+}
+
+.login-header {
+  text-align: center;
+  margin-bottom: 36px;
+}
+
+.login-logo {
+  font-size: 48px;
+  margin-bottom: 16px;
+  filter: drop-shadow(0 4px 8px rgba(99, 102, 241, 0.3));
+}
+
+.login-title {
+  font-size: 1.8rem;
+  font-weight: 800;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 8px;
+}
+
+.login-subtitle {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+
+/* ===== Formulário ===== */
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-label {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.login-submit-btn {
+  width: 100%;
+  margin-top: 8px;
+  padding: 14px;
+  font-size: 1rem;
+}
+
+/* ===== Toggle Login/Register ===== */
+.login-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 24px;
+}
+
+.login-toggle-text {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.login-toggle-btn {
+  background: none;
+  border: none;
+  color: var(--color-primary-hover);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: color var(--transition-fast);
+}
+
+.login-toggle-btn:hover {
+  color: var(--color-primary);
+  text-decoration: underline;
+}
+
+/* ===== Info ===== */
+.login-info {
+  margin-top: 20px;
+  text-align: center;
+  padding: 12px;
+  background: rgba(99, 102, 241, 0.08);
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(99, 102, 241, 0.1);
+}
+
+.login-info p {
+  color: var(--text-muted);
+  font-size: 0.8rem;
+}
+
+/* ===== Responsividade ===== */
+@media (max-width: 480px) {
+  .login-card {
+    padding: 32px 24px;
+  }
+
+  .login-title {
+    font-size: 1.5rem;
+  }
+}

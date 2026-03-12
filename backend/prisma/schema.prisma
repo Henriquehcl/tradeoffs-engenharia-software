@@ -1,0 +1,101 @@
+
+// ===========================================================================
+// Prisma Schema - Desafio Técnico Fullstack
+// ===========================================================================
+//
+// Este arquivo define o esquema do banco de dados utilizando Prisma ORM.
+//
+// Modelos:
+// - User: Tabela de usuários do sistema (autenticação JWT)
+// - Tradeoff: Entidade principal que representa o conceito
+//   "Se uma mesa possui três pernas chamadas qualidade, preço baixo
+//    e velocidade, ela seria capenga" — o triângulo de tradeoffs
+//    da engenharia de software.
+//
+// Decisões arquiteturais:
+// - O nome do modelo Prisma é "Tradeoff" para ergonomia no código
+// - A tabela no banco mapeada via @@map usa o nome completo solicitado
+// - UUIDs são usados como chaves primárias para segurança e distribuição
+// - Scores são inteiros de 0-100 representando percentuais
+// - Timestamps automáticos para auditoria
+// ===========================================================================
+ 
+
+// Configuração do gerador Prisma Client
+generator client {
+  provider = "prisma-client-js"
+}
+
+// Configuração da conexão com PostgreSQL
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+/// Modelo de Usuário
+/// Armazena credenciais de acesso ao sistema.
+/// A senha é hashada com bcrypt antes de ser persistida.
+model User {
+  /// Identificador único do usuário (UUID v4)
+  id        String   @id @default(uuid())
+
+  /// Email do usuário - utilizado como login (deve ser único)
+  email     String   @unique
+
+  /// Senha hashada com bcrypt (nunca armazenar em texto plano)
+  password  String
+
+  /// Data de criação do registro (preenchida automaticamente)
+  createdAt DateTime @default(now()) @map("created_at")
+
+  /// Relação com os tradeoffs criados por este usuário
+  tradeoffs Tradeoff[]
+
+  @@map("users")
+}
+
+/// Modelo Tradeoff (Entidade Principal)
+///
+/// Representa o conceito: "Se uma mesa possui três pernas chamadas
+/// qualidade, preço baixo e velocidade, ela seria capenga."
+///
+/// Na engenharia de software, é impossível otimizar simultaneamente
+/// qualidade, custo baixo e velocidade. Este modelo permite registrar
+/// e analisar diferentes cenários de tradeoff.
+///
+/// Cada registro possui três scores (0-100) que, somados, idealmente
+/// não ultrapassam 200 pontos — refletindo a limitação real de que
+/// não se pode maximizar tudo ao mesmo tempo.
+model Tradeoff {
+  /// Identificador único do tradeoff (UUID v4)
+  id            String   @id @default(uuid())
+
+  /// Nome descritivo do cenário de tradeoff (ex: "MVP Rápido", "Produto Enterprise")
+  name          String
+
+  /// Score de qualidade (0-100): quão bem feito é o resultado
+  /// 100 = máxima qualidade, 0 = qualidade mínima
+  qualityScore  Int      @map("quality_score")
+
+  /// Score de preço baixo (0-100): quão barato é o projeto
+  /// 100 = custo mínimo, 0 = custo máximo
+  lowPriceScore Int      @map("low_price_score")
+
+  /// Score de velocidade (0-100): quão rápido é entregue
+  /// 100 = entrega instantânea, 0 = entrega muito lenta
+  speedScore    Int      @map("speed_score")
+
+  /// Data de criação do registro
+  createdAt     DateTime @default(now()) @map("created_at")
+
+  /// Data da última atualização
+  updatedAt     DateTime @updatedAt @map("updated_at")
+
+  /// ID do usuário que criou este tradeoff
+  userId        String   @map("user_id")
+
+  /// Relação com o usuário criador
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("tradeoffs")
+}
