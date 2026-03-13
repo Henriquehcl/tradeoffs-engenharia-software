@@ -1,12 +1,3 @@
-/*
- * ===========================================================================
- * Testes E2E (Integração) - Configuração Jest
- * ===========================================================================
- *
- * Configuração específica para testes de integração (end-to-end).
- * Utiliza o diretório ./test como root e busca arquivos .e2e-spec.ts.
- * ===========================================================================
- */
 {
   "moduleFileExtensions": [
     "js",

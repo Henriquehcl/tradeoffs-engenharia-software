@@ -47,7 +47,7 @@ import { QueryTradeoffDto } from './dto/query-tradeoff.dto';
 import { JwtAuthGuard } from '../../common/guards/jwt-auth.guard';
 
 @ApiTags('Tradeoffs')
-@Controller('seumamesapossuirtrespernaschamadasqualidadeprecobaixoevelocidadeelaseriacapenga')
+@Controller('tradeoffs')
 @UseGuards(JwtAuthGuard)
 @ApiBearerAuth('JWT-auth')
 export class TradeoffsController {

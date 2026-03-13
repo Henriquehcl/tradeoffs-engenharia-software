@@ -1,14 +1,7 @@
 /*
- * ===========================================================================
  * Seed do Banco de Dados
- * ===========================================================================
- *
- * Script para popular o banco de dados com dados iniciais de desenvolvimento.
- * Cria um usuário padrão e alguns tradeoffs de exemplo para facilitar
- * o desenvolvimento e testes.
- *
- * Executar com: npx prisma db seed
- * ===========================================================================
+ * Cria o usuário inicial do sistema conforme requisito do teste técnico.
+ * Usa upsert para ser idempotente (seguro de executar várias vezes).
  */
 
 import { PrismaClient } from '@prisma/client';
@@ -19,64 +12,21 @@ const prisma = new PrismaClient();
 async function main() {
   console.log('🌱 Iniciando seed do banco de dados...');
 
-  // Cria um usuário padrão para desenvolvimento
-  const hashedPassword = await bcrypt.hash('senha123', 10);
+  const email = 'cliente@incuca.com.br';
+  const password = 'user@2026';
+
+  const hashedPassword = await bcrypt.hash(password, 10);
 
   const user = await prisma.user.upsert({
-    where: { email: 'admin@desafio.com' },
+    where: { email },
     update: {},
     create: {
-      email: 'admin@desafio.com',
+      email,
       password: hashedPassword,
     },
   });
 
-  console.log(`✅ Usuário criado: ${user.email}`);
-
-  // Cria tradeoffs de exemplo que ilustram diferentes cenários
-  const tradeoffs = [
-    {
-      name: 'MVP Startup - Rápido e Barato',
-      qualityScore: 30,
-      lowPriceScore: 90,
-      speedScore: 85,
-      userId: user.id,
-    },
-    {
-      name: 'Produto Enterprise - Qualidade Máxima',
-      qualityScore: 95,
-      lowPriceScore: 20,
-      speedScore: 25,
-      userId: user.id,
-    },
-    {
-      name: 'Hackathon - Velocidade Extrema',
-      qualityScore: 15,
-      lowPriceScore: 70,
-      speedScore: 99,
-      userId: user.id,
-    },
-    {
-      name: 'Projeto Equilibrado',
-      qualityScore: 65,
-      lowPriceScore: 60,
-      speedScore: 55,
-      userId: user.id,
-    },
-    {
-      name: 'Refatoração Planejada',
-      qualityScore: 90,
-      lowPriceScore: 40,
-      speedScore: 45,
-      userId: user.id,
-    },
-  ];
-
-  for (const tradeoff of tradeoffs) {
-    await prisma.tradeoff.create({ data: tradeoff });
-  }
-
-  console.log(`✅ ${tradeoffs.length} tradeoffs criados`);
+  console.log(`✅ Usuário inicial criado/verificado: ${user.email}`);
   console.log('🎉 Seed concluído com sucesso!');
 }
 

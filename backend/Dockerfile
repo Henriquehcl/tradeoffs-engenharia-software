@@ -13,7 +13,7 @@ RUN apk add --no-cache openssl
 COPY package.json package-lock.json ./
 
 # Instala dependências
-RUN npm ci
+RUN npm install
 
 # Copia schema do prisma
 COPY prisma ./prisma
@@ -29,4 +29,4 @@ RUN npm run build
 
 EXPOSE 3001
 
-CMD ["sh", "-c", "npx prisma migrate deploy && npm run start:prod"]
+CMD ["sh", "-c", "npx prisma migrate deploy && npx prisma db seed && npm run start:prod"]

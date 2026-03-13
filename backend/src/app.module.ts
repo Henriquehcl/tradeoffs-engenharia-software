@@ -22,6 +22,7 @@ import { DatabaseModule } from './database/database.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { UsersModule } from './modules/users/users.module';
 import { TradeoffsModule } from './modules/tradeoffs/tradeoffs.module';
+import { JokesModule } from './modules/jokes/jokes.module';
 
 @Module({
   imports: [
@@ -39,6 +40,7 @@ import { TradeoffsModule } from './modules/tradeoffs/tradeoffs.module';
     AuthModule,
     UsersModule,
     TradeoffsModule,
+    JokesModule,
   ],
 })
 export class AppModule { }

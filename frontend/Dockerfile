@@ -1,14 +1,15 @@
 # ===========================================================================
-# Frontend React + Vite
+# Frontend Vue.js + Vite + Nginx
 # ===========================================================================
 
 FROM node:20-alpine AS builder
 
 WORKDIR /app
 
-COPY package.json package-lock.json ./
+# Copy only package.json so npm generates a fresh lock file
+COPY package.json ./
 
-RUN npm ci
+RUN npm install
 
 COPY . .
 

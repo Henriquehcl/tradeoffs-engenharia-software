@@ -91,6 +91,7 @@ async function bootstrap() {
     .addTag('Auth', 'Endpoints de autenticação (login e registro)')
     .addTag('Users', 'Gerenciamento de usuários')
     .addTag('Tradeoffs', 'CRUD da entidade principal de tradeoffs')
+    .addTag('Jokes', 'Integração com API de piadas geek (frontend → backend → API externa)')
     .build();
 
   const document = SwaggerModule.createDocument(app, config);
