@@ -69,7 +69,7 @@
 
             <p class="text-caption text-center text-medium-emphasis">
               <v-icon size="14">mdi-information-outline</v-icon>
-              cliente@incuca.com.br | user@2026
+              cliente@incuca.com.br
             </p>
           </v-card>
         </v-col>

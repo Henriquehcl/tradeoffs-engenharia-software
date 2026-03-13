@@ -13,7 +13,7 @@ async function main() {
   console.log('🌱 Iniciando seed do banco de dados...');
 
   const email = 'cliente@incuca.com.br';
-  const password = 'user@2026';
+  const password = 'seumamesapossuirtrespernaschamadasqualidadeprecobaixoevelocidadeelaseriacapenga';
 
   const hashedPassword = await bcrypt.hash(password, 10);
 

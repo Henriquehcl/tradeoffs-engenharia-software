@@ -65,7 +65,7 @@ Acesse: **http://localhost:3000**
 | Campo | Valor                                                                              |
 |-------|------------------------------------------------------------------------------------|
 | Email | cliente@incuca.com.br                                                              |
-| Senha | user@2026    |
+| Senha | seumamesapossuirtrespernaschamadasqualidadeprecobaixoevelocidadeelaseriacapenga    |
 
 ---
 
